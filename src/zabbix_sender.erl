@@ -580,7 +580,7 @@ remote_addr(Addr, Resolve, To) when is_binary(Addr) ->
 
 remote_addr(Addr, true, To) when is_list(Addr) ->
 	case inet:getaddr(Addr, To) of
-		{ok, IP} -> inet:ntoa(IP);
+		{ok, IP} -> string:join([integer_to_list(Element)||Element<-tuple_to_list(IP)],".");
 		{error, Reason} -> erlang:error(Reason)
 	end;
 
